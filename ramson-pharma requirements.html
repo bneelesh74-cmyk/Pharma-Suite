@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pharma Suite — Wireframe</title>
+<style>
+:root{
+  --ink:#141322;--ink2:#5b5a72;--ink3:#9694ab;--line:#e7e5f2;--bg:#f7f6fb;--panel:#fff;
+  --acc:#5b3df5;--acc2:#9b5cf6;--acc-soft:#f0ecff;--acc-line:#d5cbff;
+  --warn:#a05c00;--warn-soft:#fff6e8;--warn-line:#f3ddb4;
+  --bad:#c0392f;--bad-soft:#fdedeb;--bad-line:#f4c9c4;
+  --ok:#1c7a4a;--ok-soft:#e8f6ee;--ok-line:#b9e2cc;
+  --r:10px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-size:13.5px;line-height:1.55;
+  font-family:ui-sans-serif,-apple-system,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+
+/* shell */
+.app{display:flex;min-height:100vh}
+.side{width:230px;flex-shrink:0;background:var(--panel);border-right:1px solid var(--line);
+  padding:16px 12px;position:sticky;top:0;height:100vh;overflow:auto}
+.brand{display:flex;align-items:center;gap:10px;padding:6px 8px 14px}
+.mark{width:31px;height:31px;border-radius:9px;background:linear-gradient(135deg,var(--acc),var(--acc2));
+  display:grid;place-items:center;color:#fff;font-weight:800;font-size:15px}
+.brand .nm{font-weight:800;letter-spacing:-.02em;font-size:15px;line-height:1.15}
+.brand .tag{color:var(--ink3);font-size:10.5px}
+.side-lbl{font-size:10.5px;letter-spacing:.05em;color:var(--ink3);padding:14px 10px 5px;font-weight:600}
+.mi{display:block;border:0;background:none;font:inherit;font-size:13px;color:var(--ink2);
+  padding:8px 11px;border-radius:8px;cursor:pointer;width:100%;text-align:left}
+.mi:hover{background:var(--bg)}
+.mi.on{background:var(--acc-soft);color:var(--acc);font-weight:600}
+
+.main{flex:1;min-width:0}
+.top{background:var(--panel);border-bottom:1px solid var(--line);padding:13px 24px;position:sticky;top:0;z-index:20;
+  display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.h1{font-size:16.5px;font-weight:700;letter-spacing:-.02em;margin:0}
+.sub{color:var(--ink3);font-size:11.5px;margin-top:1px}
+.pill{font-size:10.5px;background:var(--warn-soft);color:var(--warn);border:1px solid var(--warn-line);border-radius:20px;padding:3px 10px}
+.wrap{padding:20px 24px 60px;max-width:1140px}
+
+.sec{margin-bottom:26px}
+.sec-h{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.sec-h h2{font-size:14px;font-weight:700;letter-spacing:-.01em;margin:0}
+.sec-h .note{color:var(--ink3);font-size:11.5px;margin:2px 0 0}
+
+.src{display:inline-block;font-size:10px;line-height:1.3;background:var(--acc-soft);color:var(--acc);
+  border:1px solid var(--acc-line);border-radius:6px;padding:0 6px;margin-left:6px;vertical-align:middle;font-weight:600}
+.src.ia{background:var(--ok-soft);color:var(--ok);border-color:var(--ok-line)}
+
+.grid{display:grid;gap:13px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:940px){.g2,.g3,.g4{grid-template-columns:1fr}}
+
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:15px}
+.card h3{margin:0 0 2px;font-size:13px;font-weight:700}
+.card .note{color:var(--ink3);font-size:11.5px;margin:0 0 11px}
+.kpi .lbl{color:var(--ink3);font-size:11.5px}
+.kpi .val{font-size:21px;font-weight:800;letter-spacing:-.03em;margin-top:2px}
+.kpi .dl{color:var(--ink3);font-size:11px}
+
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{text-align:left;color:var(--ink3);font-weight:600;font-size:11px;padding:7px 9px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:8px 9px;border-bottom:1px solid var(--line);vertical-align:middle}
+tbody tr:last-child td{border-bottom:0}
+tfoot td{border-top:1px solid var(--line);font-weight:600;border-bottom:0}
+.num{text-align:right;font-variant-numeric:tabular-nums}
+.nm2{font-weight:600}
+tr.click{cursor:pointer}
+tr.click:hover{background:var(--bg)}
+
+.chip{display:inline-block;font-size:10.5px;border-radius:20px;padding:2px 9px;border:1px solid;white-space:nowrap}
+.chip.g{background:var(--ok-soft);color:var(--ok);border-color:var(--ok-line)}
+.chip.a{background:var(--warn-soft);color:var(--warn);border-color:var(--warn-line)}
+.chip.r{background:var(--bad-soft);color:var(--bad);border-color:var(--bad-line)}
+.chip.n{background:var(--acc-soft);color:var(--acc);border-color:var(--acc-line)}
+.chip.m{background:var(--bg);color:var(--ink2);border-color:var(--line)}
+
+.btn{border:1px solid var(--line);background:var(--panel);font:inherit;font-size:12px;color:var(--ink2);
+  padding:6px 12px;border-radius:8px;cursor:pointer}
+.btn:hover{background:var(--bg)}
+.btn.pri{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff;border-color:transparent;font-weight:600}
+.btn.sm{padding:3px 9px;font-size:11.5px}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.spread{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+
+.bar{height:5px;background:var(--bg);border-radius:20px;overflow:hidden;width:110px;display:inline-block;vertical-align:middle}
+.bar i{display:block;height:100%;background:var(--acc)}
+.bar.gd i{background:var(--ok)}.bar.bd i{background:var(--bad)}
+
+/* inputs — kept small and sized */
+label{display:block;font-size:11px;color:var(--ink2);margin-bottom:3px;font-weight:600}
+input,select,textarea{border:1px solid var(--line);border-radius:7px;padding:6px 9px;
+  font:inherit;font-size:12.5px;background:var(--panel);color:var(--ink);max-width:100%}
+textarea{resize:vertical;line-height:1.45}
+.fld{margin-bottom:10px}
+.w-sm{width:110px}.w-md{width:180px}.w-lg{width:100%}
+
+.seg{display:inline-flex;background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:3px}
+.seg button{border:0;background:none;font:inherit;font-size:12px;color:var(--ink2);padding:5px 13px;border-radius:6px;cursor:pointer}
+.seg button.on{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff;font-weight:600}
+
+.hint{background:var(--acc-soft);border:1px solid var(--acc-line);border-radius:var(--r);padding:10px 13px;font-size:12px;color:var(--ink2);margin-bottom:16px}
+.hint b{color:var(--acc)}
+
+/* process flow */
+.flow{display:flex;flex-wrap:wrap;margin-bottom:12px}
+.stp{flex:1;min-width:135px;background:var(--panel);border:1px solid var(--line);padding:10px 12px}
+.stp:first-child{border-radius:var(--r) 0 0 var(--r)}
+.stp:last-child{border-radius:0 var(--r) var(--r) 0}
+.stp+.stp{border-left:0}
+.stp .n{font-size:10.5px;color:var(--acc);font-weight:700}
+.stp .t{font-size:12px;font-weight:600;margin-top:1px}
+.stp .d{font-size:11px;color:var(--ink3);margin-top:1px}
+@media(max-width:940px){.stp{border-radius:var(--r)!important;border-left:1px solid var(--line)!important;min-width:100%;margin-bottom:6px}}
+
+/* whatsapp */
+.wa{background:#ece5dd;border-radius:var(--r);padding:12px;border:1px solid var(--line)}
+.msg{max-width:82%;padding:7px 10px;border-radius:9px;font-size:12.5px;margin-bottom:7px;background:#fff}
+.msg.out{background:#dcf8c6;margin-left:auto}
+.msg .who{font-size:10px;color:var(--ink3);margin-bottom:2px}
+.msg .opt{display:flex;gap:6px;margin-top:7px;border-top:1px solid rgba(0,0,0,.08);padding-top:6px}
+.msg .opt span{flex:1;text-align:center;font-size:11.5px;color:#1f8a4c;font-weight:600;border:1px solid rgba(0,0,0,.08);border-radius:6px;padding:3px}
+
+/* side panel */
+.ov{position:fixed;inset:0;background:rgba(20,19,34,.35);opacity:0;pointer-events:none;transition:.2s;z-index:40}
+.ov.on{opacity:1;pointer-events:auto}
+.pnl{position:fixed;top:0;right:0;height:100vh;width:520px;max-width:94vw;background:var(--panel);
+  border-left:1px solid var(--line);transform:translateX(100%);transition:.25s;z-index:50;overflow:auto;padding:20px 22px}
+.pnl.on{transform:none}
+.pnl-h{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px}
+.pnl-h h3{margin:0;font-size:15px;font-weight:700}
+.x{border:0;background:var(--bg);width:28px;height:28px;border-radius:8px;cursor:pointer;font-size:15px;color:var(--ink2)}
+
+.exp{display:none}.exp.on{display:table-row}
+.exp td{background:var(--bg);font-size:11.5px;color:var(--ink2)}
+.tw{cursor:pointer;user-select:none}
+.tw .ar{display:inline-block;width:12px;color:var(--ink3)}
+
+.view{display:none}.view.on{display:block}
+.foot{color:var(--ink3);font-size:11px;text-align:center;padding:24px 0 0}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(18px);background:var(--ink);color:#fff;
+  padding:9px 17px;border-radius:9px;font-size:12.5px;opacity:0;transition:.25s;z-index:99}
+.toast.on{opacity:1;transform:translateX(-50%)}
+.step-box{border:1px solid var(--line);border-radius:var(--r);padding:14px;margin-bottom:12px;background:var(--panel)}
+.step-box .sh{display:flex;align-items:center;gap:9px;margin-bottom:10px}
+.step-box .sn{width:21px;height:21px;border-radius:6px;background:var(--acc-soft);color:var(--acc);
+  display:grid;place-items:center;font-size:11px;font-weight:700;flex-shrink:0}
+.step-box .st{font-size:12.5px;font-weight:700}
+</style>
+</head>
+<body>
+<div class="app">
+
+<aside class="side">
+  <div class="brand"><div class="mark">R</div>
+    <div><div class="nm">Pharma Suite</div><div class="tag"></div></div></div>
+
+  <div class="side-lbl">Owner Dashboard</div>
+  <button class="mi on" data-v="overview">Overview</button>
+  <button class="mi" data-v="sales">Sales &amp; Collections</button>
+  <button class="mi" data-v="brand">Brands &amp; Products</button>
+  <button class="mi" data-v="custtgt">Customer Targets</button>
+  <button class="mi" data-v="remind">Reminders</button>
+  <button class="mi" data-v="inv">Inventory</button>
+  <button class="mi" data-v="settings">Settings</button>
+
+  <div class="side-lbl">Order Fulfilment</div>
+  <button class="mi" data-v="orders">Orders</button>
+  <button class="mi" data-v="oflow">Process Flow</button>
+</aside>
+
+<div class="main">
+  <div class="top">
+    <div><h1 class="h1" id="ttl">Overview</h1><div class="sub" id="stl">Owner Dashboard</div></div>
+    <span class="pill"></span>
+  </div>
+  <div class="wrap">
+
+  <!-- ================= OVERVIEW ================= -->
+
+    <div class="grid g4" style="margin-bottom:20px">
+      <div class="card kpi"><div class="lbl">Total sales <span class="src">ERP</span></div><div class="val">₹ 62.4 L</div><div class="dl">Target ₹ 75 L · 83%</div></div>
+      <div class="card kpi"><div class="lbl">Collections <span class="src">ERP</span></div><div class="val">₹ 48.1 L</div><div class="dl">Cheque ₹ 35.5 L · Cash ₹ 12.6 L</div></div>
+      <div class="card kpi"><div class="lbl">Commission payable <span class="src ia">In app</span></div><div class="val">₹ 1.06 L</div><div class="dl">Tiered slabs, see Settings</div></div>
+      <div class="card kpi"><div class="lbl">Reminders due <span class="src">ERP</span></div><div class="val">18</div><div class="dl">Next 30 days</div></div>
+    </div>
+
+    <div class="grid g2">
+      <div class="card">
+        <h3>Sales by representative</h3><p class="note">August 2026 · click a row for full detail</p>
+        <table><thead><tr><th>Representative</th><th class="num">Sales</th><th class="num">Customers</th><th>Target</th></tr></thead>
+          <tbody>
+            <tr class="click" data-rep="Prakash M"><td class="nm2">Prakash M</td><td class="num">₹ 18.2 L</td><td class="num">64</td><td><span class="chip g">102%</span></td></tr>
+            <tr class="click" data-rep="Deepa R"><td class="nm2">Deepa R</td><td class="num">₹ 14.6 L</td><td class="num">51</td><td><span class="chip g">97%</span></td></tr>
+            <tr class="click" data-rep="Imran S"><td class="nm2">Imran S</td><td class="num">₹ 12.9 L</td><td class="num">47</td><td><span class="chip a">86%</span></td></tr>
+            <tr class="click" data-rep="Vignesh K"><td class="nm2">Vignesh K</td><td class="num">₹ 9.4 L</td><td class="num">38</td><td><span class="chip r">63%</span></td></tr>
+            <tr class="click" data-rep="Sneha P"><td class="nm2">Sneha P</td><td class="num">₹ 7.3 L</td><td class="num">29</td><td><span class="chip r">58%</span></td></tr>
+          </tbody></table>
+      </div>
+      <div class="card">
+        <h3>Top-performing brands</h3><p class="note">By what customers bought this month</p>
+        <table><thead><tr><th>Brand</th><th class="num">Revenue</th><th class="num">Qty</th></tr></thead>
+          <tbody>
+            <tr><td class="nm2">Cipla</td><td class="num">₹ 16.8 L</td><td class="num">9,240</td></tr>
+            <tr><td class="nm2">Sun Pharma</td><td class="num">₹ 13.1 L</td><td class="num">7,610</td></tr>
+            <tr><td class="nm2">Mankind</td><td class="num">₹ 10.4 L</td><td class="num">6,880</td></tr>
+            <tr><td class="nm2">Dr. Reddy's</td><td class="num">₹ 8.9 L</td><td class="num">4,320</td></tr>
+            <tr><td class="nm2">Abbott</td><td class="num">₹ 7.2 L</td><td class="num">3,910</td></tr>
+          </tbody></table>
+      </div>
+    </div>
+
+    <div class="grid g2" style="margin-top:13px">
+      <div class="card">
+        <h3>Reminders in the next 30 days</h3><p class="note">Birthday · anniversary · drug licence expiry</p>
+        <table><thead><tr><th>Customer</th><th>Type</th><th>Due</th><th></th></tr></thead>
+          <tbody>
+            <tr><td class="nm2">Sri Balaji Medicals</td><td><span class="chip r">Licence expiry</span></td><td>14 Sep</td><td><button class="btn sm" data-go="remind">Send</button></td></tr>
+            <tr><td class="nm2">New Life Pharmacy</td><td><span class="chip n">Birthday</span></td><td>05 Sep</td><td><button class="btn sm" data-go="remind">Send</button></td></tr>
+            <tr><td class="nm2">Annai Medical Store</td><td><span class="chip n">Anniversary</span></td><td>11 Sep</td><td><button class="btn sm" data-go="remind">Send</button></td></tr>
+          </tbody></table>
+      </div>
+      <div class="card">
+        <h3>Orders from WhatsApp</h3><p class="note">Live status</p>
+        <table><thead><tr><th>Order</th><th>Customer</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr class="click" data-go="orders"><td class="nm2">#ORD-1043</td><td>Unknown number</td><td><span class="chip n">Received</span></td></tr>
+            <tr class="click" data-go="orders"><td class="nm2">#ORD-1042</td><td>Guru Pharma</td><td><span class="chip a">In review</span></td></tr>
+            <tr class="click" data-go="orders"><td class="nm2">#ORD-1040</td><td>Kumar Medicals</td><td><span class="chip g">Placed</span></td></tr>
+          </tbody></table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SALES & COLLECTIONS ================= -->
+  <section class="view" id="v-sales">
+    <div class="spread" style="margin-bottom:16px">
+      <div class="seg"><button class="on">Monthly</button><button>Quarterly</button><button>Annual</button></div>
+      <span class="src">All figures read from ERP · commission calculated in app</span>
+    </div>
+
+    <div class="grid g4 sec">
+      <div class="card kpi"><div class="lbl">Total sales</div><div class="val">₹ 62.4 L</div></div>
+      <div class="card kpi"><div class="lbl">Total collected</div><div class="val">₹ 48.1 L</div></div>
+      <div class="card kpi"><div class="lbl">Outstanding</div><div class="val">₹ 14.3 L</div></div>
+      <div class="card kpi"><div class="lbl">Commission payable</div><div class="val">₹ 1.06 L</div></div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h"><div><h2>Sales performance</h2>
+        <p class="note">Sales, customers managed, site visits and calculated commission · click a row for detail</p></div></div>
+      <div class="card" style="padding:6px 8px">
+        <table><thead><tr><th>Representative</th><th class="num">Sales</th><th class="num">Customers</th>
+          <th class="num">Visits planned</th><th class="num">Visits done</th><th class="num">Commission</th><th></th></tr></thead>
+          <tbody>
+            <tr class="click" data-rep="Prakash M"><td class="nm2">Prakash M</td><td class="num">₹ 18.2 L</td><td class="num">64</td><td class="num">88</td><td class="num">81</td><td class="num">₹ 31,400</td><td><span class="chip g">On track</span></td></tr>
+            <tr class="click" data-rep="Deepa R"><td class="nm2">Deepa R</td><td class="num">₹ 14.6 L</td><td class="num">51</td><td class="num">76</td><td class="num">72</td><td class="num">₹ 24,200</td><td><span class="chip g">On track</span></td></tr>
+            <tr class="click" data-rep="Imran S"><td class="nm2">Imran S</td><td class="num">₹ 12.9 L</td><td class="num">47</td><td class="num">70</td><td class="num">58</td><td class="num">₹ 20,800</td><td><span class="chip a">Watch</span></td></tr>
+            <tr class="click" data-rep="Vignesh K"><td class="nm2">Vignesh K</td><td class="num">₹ 9.4 L</td><td class="num">38</td><td class="num">62</td><td class="num">40</td><td class="num">₹ 15,900</td><td><span class="chip r">Behind</span></td></tr>
+            <tr class="click" data-rep="Sneha P"><td class="nm2">Sneha P</td><td class="num">₹ 7.3 L</td><td class="num">29</td><td class="num">54</td><td class="num">37</td><td class="num">₹ 13,700</td><td><span class="chip r">Behind</span></td></tr>
+          </tbody>
+          <tfoot><tr><td>Total</td><td class="num">₹ 62.4 L</td><td class="num">229</td><td class="num">350</td><td class="num">288</td><td class="num">₹ 1,06,000</td><td></td></tr></tfoot>
+        </table>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h"><div><h2>Targets</h2>
+        <p class="note">Monthly targets set in the ERP, compared with actual sales</p></div></div>
+      <div class="card" style="padding:6px 8px">
+        <table><thead><tr><th>Representative</th><th class="num">Target</th><th class="num">Achieved</th><th class="num">Gap</th><th>Progress</th></tr></thead>
+          <tbody>
+            <tr><td class="nm2">Prakash M</td><td class="num">₹ 17.8 L</td><td class="num">₹ 18.2 L</td><td class="num">+₹ 0.4 L</td><td><span class="bar gd"><i style="width:100%"></i></span> <span class="chip g">102%</span></td></tr>
+            <tr><td class="nm2">Deepa R</td><td class="num">₹ 15.0 L</td><td class="num">₹ 14.6 L</td><td class="num">−₹ 0.4 L</td><td><span class="bar gd"><i style="width:97%"></i></span> <span class="chip g">97%</span></td></tr>
+            <tr><td class="nm2">Imran S</td><td class="num">₹ 15.0 L</td><td class="num">₹ 12.9 L</td><td class="num">−₹ 2.1 L</td><td><span class="bar"><i style="width:86%"></i></span> <span class="chip a">86%</span></td></tr>
+            <tr><td class="nm2">Vignesh K</td><td class="num">₹ 15.0 L</td><td class="num">₹ 9.4 L</td><td class="num">−₹ 5.6 L</td><td><span class="bar bd"><i style="width:63%"></i></span> <span class="chip r">63%</span></td></tr>
+            <tr><td class="nm2">Sneha P</td><td class="num">₹ 12.5 L</td><td class="num">₹ 7.3 L</td><td class="num">−₹ 5.2 L</td><td><span class="bar bd"><i style="width:58%"></i></span> <span class="chip r">58%</span></td></tr>
+          </tbody></table>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h"><div><h2>Collections</h2>
+        <p class="note">Cheque and cash collected, by count and value</p></div></div>
+      <div class="grid g3" style="margin-bottom:13px">
+        <div class="card kpi"><div class="lbl">Cheques</div><div class="val">₹ 35.5 L</div><div class="dl">214 cheques</div></div>
+        <div class="card kpi"><div class="lbl">Cash</div><div class="val">₹ 12.6 L</div><div class="dl">168 collections</div></div>
+        <div class="card kpi"><div class="lbl">Total collected</div><div class="val">₹ 48.1 L</div><div class="dl">Against ₹ 62.4 L sales</div></div>
+      </div>
+      <div class="card" style="padding:6px 8px">
+        <table><thead><tr><th>Representative</th><th class="num">Cheques</th><th class="num">Cheque value</th>
+          <th class="num">Cash entries</th><th class="num">Cash value</th><th class="num">Total</th></tr></thead>
+          <tbody>
+            <tr><td class="nm2">Prakash M</td><td class="num">62</td><td class="num">₹ 10.8 L</td><td class="num">44</td><td class="num">₹ 3.6 L</td><td class="num">₹ 14.4 L</td></tr>
+            <tr><td class="nm2">Deepa R</td><td class="num">51</td><td class="num">₹ 8.9 L</td><td class="num">39</td><td class="num">₹ 2.8 L</td><td class="num">₹ 11.7 L</td></tr>
+            <tr><td class="nm2">Imran S</td><td class="num">42</td><td class="num">₹ 7.2 L</td><td class="num">33</td><td class="num">₹ 2.5 L</td><td class="num">₹ 9.7 L</td></tr>
+            <tr><td class="nm2">Vignesh K</td><td class="num">33</td><td class="num">₹ 5.1 L</td><td class="num">28</td><td class="num">₹ 2.1 L</td><td class="num">₹ 7.2 L</td></tr>
+            <tr><td class="nm2">Sneha P</td><td class="num">26</td><td class="num">₹ 3.5 L</td><td class="num">24</td><td class="num">₹ 1.6 L</td><td class="num">₹ 5.1 L</td></tr>
+          </tbody>
+          <tfoot><tr><td>Total</td><td class="num">214</td><td class="num">₹ 35.5 L</td><td class="num">168</td><td class="num">₹ 12.6 L</td><td class="num">₹ 48.1 L</td></tr></tfoot>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= BRANDS & PRODUCTS ================= -->
+  <section class="view" id="v-brand">
+    <div class="spread" style="margin-bottom:16px">
+      <div class="seg"><button class="on">Monthly</button><button>Quarterly</button><button>Annual</button></div>
+      <span class="src">ERP</span>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h"><div><h2>Brand mapping</h2>
+        <p class="note">Which customers buy each brand · click a brand to expand the customer list</p></div></div>
+      <div class="card" style="padding:6px 8px">
+        <table><thead><tr><th>Brand</th><th class="num">Customers</th><th class="num">Qty</th><th class="num">Revenue</th></tr></thead>
+          <tbody>
+            <tr class="tw" data-exp="e1"><td class="nm2"><span class="ar">▸</span> Cipla</td><td class="num">148</td><td class="num">9,240</td><td class="num">₹ 16.8 L</td></tr>
+            <tr class="exp" id="e1"><td colspan="4">
+              Sri Balaji Medicals · New Life Pharmacy · Annai Medical Store · City Pharmacy · Guru Pharma · Kumar Medicals · MGR Medicals · Vasan Medicals · Anand Pharmacy · Sakthi Medicals <span class="chip m">+138 more</span>
+            </td></tr>
+            <tr class="tw" data-exp="e2"><td class="nm2"><span class="ar">▸</span> Sun Pharma</td><td class="num">121</td><td class="num">7,610</td><td class="num">₹ 13.1 L</td></tr>
+            <tr class="exp" id="e2"><td colspan="4">
+              City Pharmacy · Kumar Medicals · Guru Pharma · Annai Medical Store · Priya Medicals · Vasan Medicals · Lakshmi Pharmacy <span class="chip m">+114 more</span>
+            </td></tr>
+            <tr class="tw" data-exp="e3"><td class="nm2"><span class="ar">▸</span> Mankind</td><td class="num">104</td><td class="num">6,880</td><td class="num">₹ 10.4 L</td></tr>
+            <tr class="exp" id="e3"><td colspan="4">
+              New Life Pharmacy · MGR Medicals · Sakthi Medicals · Anand Pharmacy · Sri Balaji Medicals <span class="chip m">+99 more</span>
+            </td></tr>
+            <tr class="tw" data-exp="e4"><td class="nm2"><span class="ar">▸</span> Dr. Reddy's</td><td class="num">86</td><td class="num">4,320</td><td class="num">₹ 8.9 L</td></tr>
+            <tr class="exp" id="e4"><td colspan="4">
+              Guru Pharma · Priya Medicals · City Pharmacy · Kumar Medicals <span class="chip m">+82 more</span>
+            </td></tr>
+            <tr class="tw" data-exp="e5"><td class="nm2"><span class="ar">▸</span> Abbott</td><td class="num">73</td><td class="num">3,910</td><td class="num">₹ 7.2 L</td></tr>
+            <tr class="exp" id="e5"><td colspan="4">
+              Vasan Medicals · Lakshmi Pharmacy · Annai Medical Store <span class="chip m">+70 more</span>
+            </td></tr>
+          </tbody></table>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h"><div><h2>Brand performance</h2>
+        <p class="note">Which brands are selling most, by value and quantity</p></div></div>
+      <div class="card" style="padding:6px 8px">
+        <table><thead><tr><th>Brand</th><th class="num">Qty sold</th><th class="num">Revenue</th><th>Share of total revenue</th></tr></thead>
+          <tbody>
+            <tr><td class="nm2">Cipla</td><td class="num">9,240</td><td class="num">₹ 16.8 L</td><td><span class="bar"><i style="width:100%"></i></span> 27%</td></tr>
+            <tr><td class="nm2">Sun Pharma</td><td class="num">7,610</td><td class="num">₹ 13.1 L</td><td><span class="bar"><i style="width:78%"></i></span> 21%</td></tr>
+            <tr><td class="nm2">Mankind</td><td class="num">6,880</td><td class="num">₹ 10.4 L</td><td><span class="bar"><i style="width:62%"></i></span> 17%</td></tr>
+            <tr><td class="nm2">Dr. Reddy's</td><td class="num">4,320</td><td class="num">₹ 8.9 L</td><td><span class="bar"><i style="width:53%"></i></span> 14%</td></tr>
+            <tr><td class="nm2">Abbott</td><td class="num">3,910</td><td class="num">₹ 7.2 L</td><td><span class="bar"><i style="width:43%"></i></span> 12%</td></tr>
+          </tbody></table>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">
+        <div><h2>Top-selling products</h2><p class="note">Top 5 for each representative</p></div>
+        <div class="row"><div class="seg"><button class="on">By revenue</button><button>By quantity</button></div>
+          <select class="w-md"><option>All representatives</option><option>Prakash M</option><option>Deepa R</option></select></div>
+      </div>
+      <div class="grid g2">
+        <div class="card"><h3>Prakash M</h3><p class="note">Chennai North</p>
+          <table><thead><tr><th>#</th><th>Product</th><th class="num">Qty</th><th class="num">Revenue</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td class="nm2">Azithral 500</td><td class="num">1,840</td><td class="num">₹ 2.4 L</td></tr>
+              <tr><td>2</td><td class="nm2">Pan-D 40</td><td class="num">1,610</td><td class="num">₹ 1.9 L</td></tr>
+              <tr><td>3</td><td class="nm2">Dolo 650</td><td class="num">2,900</td><td class="num">₹ 1.6 L</td></tr>
+              <tr><td>4</td><td class="nm2">Zerodol SP</td><td class="num">1,150</td><td class="num">₹ 1.3 L</td></tr>
+              <tr><td>5</td><td class="nm2">Montek LC</td><td class="num">980</td><td class="num">₹ 1.1 L</td></tr>
+            </tbody></table></div>
+        <div class="card"><h3>Deepa R</h3><p class="note">Chennai West</p>
+          <table><thead><tr><th>#</th><th>Product</th><th class="num">Qty</th><th class="num">Revenue</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td class="nm2">Augmentin 625</td><td class="num">1,420</td><td class="num">₹ 2.1 L</td></tr>
+              <tr><td>2</td><td class="nm2">Shelcal 500</td><td class="num">1,980</td><td class="num">₹ 1.7 L</td></tr>
+              <tr><td>3</td><td class="nm2">Telma 40</td><td class="num">1,240</td><td class="num">₹ 1.4 L</td></tr>
+              <tr><td>4</td><td class="nm2">Glycomet GP2</td><td class="num">1,050</td><td class="num">₹ 1.2 L</td></tr>
+              <tr><td>5</td><td class="nm2">Ecosprin 75</td><td class="num">2,310</td><td class="num">₹ 0.9 L</td></tr>
+            </tbody></table></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CUSTOMER TARGETS ================= -->
+  <section class="view" id="v-custtgt">
+    <div class="hint">Each customer has a purchase target. Their achievement is measured on the <b>amount collected on time</b>, not just billed.
+      Paying on time earns the customer an incentive, calculated on tiered slabs <span class="src">ERP</span> for collections, <span class="src ia">In app</span> for the incentive.</div>
+
+    <div class="spread" style="margin-bottom:16px">
+      <div class="seg"><button class="on">Quarterly</button><button>Monthly</button><button>Annual</button></div>
+    </div>
+
+    <div class="grid g4 sec">
+      <div class="card kpi"><div class="lbl">Customers with targets</div><div class="val">7</div></div>
+      <div class="card kpi"><div class="lbl">Ahead of target</div><div class="val" style="color:var(--ok)">2</div></div>
+      <div class="card kpi"><div class="lbl">On track</div><div class="val">2</div></div>
+      <div class="card kpi"><div class="lbl">Behind target</div><div class="val" style="color:var(--bad)">3</div></div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">
+        <div><h2>Target achievement</h2>
+          <p class="note">On-time collection against each customer's target · behind-target rows can be nudged via WhatsApp, email or call</p></div>
+        <div class="row"><div class="seg"><button class="on">All</button><button>Behind (3)</button><button>On track</button><button>Ahead</button></div></div>
+      </div>
+      <div class="card" style="padding:6px 8px">
+        <table><thead><tr><th>Customer / retailer</th><th class="num">Target (QTR)</th>
+          <th class="num">Collected on time</th><th>Progress</th><th>Status</th><th>Incentive earned</th><th>Follow-up</th></tr></thead>
+          <tbody>
+            <tr><td class="nm2">Sri Balaji Medicals</td><td class="num">₹ 5.0 L</td><td class="num">₹ 3.2 L</td><td><span class="bar"><i style="width:64%"></i></span> 64%</td><td><span class="chip a">On track</span></td><td class="num">₹ 3,200</td><td>—</td></tr>
+            <tr style="background:var(--bad-soft)"><td class="nm2">New Life Pharmacy</td><td class="num">₹ 4.0 L</td><td class="num">₹ 1.4 L</td><td><span class="bar bd"><i style="width:35%"></i></span> 35%</td><td><span class="chip r">Behind</span></td><td class="num">₹ 1,400</td><td><div class="row"><button class="btn sm">WhatsApp</button><button class="btn sm">Email</button><button class="btn sm">Call</button></div></td></tr>
+            <tr><td class="nm2">Annai Medical Store</td><td class="num">₹ 3.0 L</td><td class="num">₹ 2.9 L</td><td><span class="bar gd"><i style="width:97%"></i></span> 97%</td><td><span class="chip g">Ahead</span></td><td class="num">₹ 4,350</td><td>—</td></tr>
+            <tr style="background:var(--bad-soft)"><td class="nm2">City Pharmacy</td><td class="num">₹ 6.0 L</td><td class="num">₹ 2.1 L</td><td><span class="bar bd"><i style="width:35%"></i></span> 35%</td><td><span class="chip r">Behind</span></td><td class="num">₹ 2,100</td><td><div class="row"><button class="btn sm">WhatsApp</button><button class="btn sm">Email</button><button class="btn sm">Call</button></div></td></tr>
+            <tr><td class="nm2">Guru Pharma</td><td class="num">₹ 2.5 L</td><td class="num">₹ 1.9 L</td><td><span class="bar"><i style="width:76%"></i></span> 76%</td><td><span class="chip a">On track</span></td><td class="num">₹ 1,900</td><td>—</td></tr>
+            <tr style="background:var(--bad-soft)"><td class="nm2">Kumar Medicals</td><td class="num">₹ 2.0 L</td><td class="num">₹ 0.6 L</td><td><span class="bar bd"><i style="width:30%"></i></span> 30%</td><td><span class="chip r">Behind</span></td><td class="num">₹ 600</td><td><div class="row"><button class="btn sm">WhatsApp</button><button class="btn sm">Email</button><button class="btn sm">Call</button></div></td></tr>
+            <tr><td class="nm2">MGR Medicals</td><td class="num">₹ 3.5 L</td><td class="num">₹ 3.6 L</td><td><span class="bar gd"><i style="width:100%"></i></span> 103%</td><td><span class="chip g">Ahead</span></td><td class="num">₹ 5,400</td><td>—</td></tr>
+          </tbody></table>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h"><div><h2>How the customer incentive works</h2>
+        <p class="note">Incentive is a reward for on-time payment, on tiered slabs. Slab rates are editable in Settings.</p></div></div>
+      <div class="card">
+        <table><thead><tr><th>On-time collection slab</th><th class="num">Incentive rate</th></tr></thead>
+          <tbody>
+            <tr><td>0 – ₹ 1 L</td><td class="num">0.5%</td></tr>
+            <tr><td>₹ 1 L – ₹ 3 L</td><td class="num">1%</td></tr>
+            <tr><td>Above ₹ 3 L</td><td class="num">1.5%</td></tr>
+          </tbody></table>
+        <p class="note" style="margin:11px 0 0">Example — a customer who pays ₹ 3.6 L on time earns: first ₹ 1 L at 0.5% = ₹ 500 · next ₹ 2 L at 1% = ₹ 2,000 · remaining ₹ 0.6 L at 1.5% = ₹ 900 → <b>₹ 3,400</b>. Late payments do not count toward the incentive.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= REMINDERS ================= -->
+  <section class="view" id="v-remind">
+    <div class="hint">Dates come from the ERP <span class="src">ERP</span>. Reminders appear <b>30 days</b> before the due date.
+      Clicking <b>Send</b> opens the compose panel where the channel and message are chosen.</div>
+
+    <div class="grid g3 sec">
+      <div class="card kpi"><div class="lbl">Licence expiring</div><div class="val">7</div><div class="dl">Next 30 days</div></div>
+      <div class="card kpi"><div class="lbl">Birthdays</div><div class="val">6</div><div class="dl">Next 30 days</div></div>
+      <div class="card kpi"><div class="lbl">Anniversaries</div><div class="val">5</div><div class="dl">Next 30 days</div></div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h"><div><h2>Upcoming reminders</h2><p class="note">Next 30 days</p></div>
+        <div class="row"><select class="w-md"><option>All types</option><option>Licence expiry</option><option>Birthday</option><option>Anniversary</option></select></div></div>
+      <div class="card" style="padding:6px 8px">
+        <table><thead><tr><th>Customer</th><th>Contact</th><th>Type</th><th>Due</th><th>Status</th><th></th></tr></thead>
+          <tbody>
+            <tr><td class="nm2">Sri Balaji Medicals</td><td>Mr. Ravi</td><td><span class="chip r">Licence expiry</span></td><td>14 Sep</td><td><span class="chip m">Not sent</span></td><td><button class="btn sm" data-comp="Sri Balaji Medicals|Licence expiry|14 Sep 2026">Send</button></td></tr>
+            <tr><td class="nm2">City Pharmacy</td><td>Mr. Suresh</td><td><span class="chip r">Licence expiry</span></td><td>22 Sep</td><td><span class="chip m">Not sent</span></td><td><button class="btn sm" data-comp="City Pharmacy|Licence expiry|22 Sep 2026">Send</button></td></tr>
+            <tr><td class="nm2">New Life Pharmacy</td><td>Mrs. Kavitha</td><td><span class="chip n">Birthday</span></td><td>05 Sep</td><td><span class="chip m">Not sent</span></td><td><button class="btn sm" data-comp="New Life Pharmacy|Birthday|05 Sep 2026">Send</button></td></tr>
+            <tr><td class="nm2">Annai Medical Store</td><td>Mr. Murugan</td><td><span class="chip n">Anniversary</span></td><td>11 Sep</td><td><span class="chip m">Not sent</span></td><td><button class="btn sm" data-comp="Annai Medical Store|Anniversary|11 Sep 2026">Send</button></td></tr>
+            <tr><td class="nm2">Guru Pharma</td><td>Mr. Karthik</td><td><span class="chip n">Birthday</span></td><td>18 Sep</td><td><span class="chip m">Not sent</span></td><td><button class="btn sm" data-comp="Guru Pharma|Birthday|18 Sep 2026">Send</button></td></tr>
+          </tbody></table>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h"><div><h2>Reminder history</h2><p class="note">Everything sent so far</p></div>
+        <div class="row"><input class="w-md" placeholder="Search customer"><button class="btn">Export</button></div></div>
+      <div class="card" style="padding:6px 8px">
+        <table><thead><tr><th>Customer</th><th>Type</th><th>Channel</th><th>Sent on</th><th>Message</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td class="nm2">Kumar Medicals</td><td><span class="chip n">Birthday</span></td><td>WhatsApp</td><td>28 Aug 2026, 09:10</td><td>Dear Mr. Kumar, wishing you a very happy birthday…</td><td><span class="chip g">Delivered</span></td></tr>
+            <tr><td class="nm2">MGR Medicals</td><td><span class="chip r">Licence expiry</span></td><td>Email</td><td>26 Aug 2026, 11:45</td><td>A friendly reminder that your drug licence is due…</td><td><span class="chip g">Delivered</span></td></tr>
+            <tr><td class="nm2">Vasan Medicals</td><td><span class="chip n">Anniversary</span></td><td>WhatsApp</td><td>24 Aug 2026, 08:30</td><td>Warm wishes on your wedding anniversary from…</td><td><span class="chip g">Delivered</span></td></tr>
+            <tr><td class="nm2">Priya Medicals</td><td><span class="chip r">Licence expiry</span></td><td>WhatsApp</td><td>21 Aug 2026, 10:05</td><td>A friendly reminder that your drug licence is due…</td><td><span class="chip a">Not delivered</span></td></tr>
+            <tr><td class="nm2">Lakshmi Pharmacy</td><td><span class="chip n">Birthday</span></td><td>Email</td><td>19 Aug 2026, 09:00</td><td>Dear Mrs. Lakshmi, wishing you a very happy…</td><td><span class="chip g">Delivered</span></td></tr>
+          </tbody></table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= INVENTORY ================= -->
+  <section class="view" id="v-inv">
+    <div class="hint">Current stock read from the ERP <span class="src">ERP</span>. Display only. This is the same stock the Order Fulfilment module checks against.</div>
+    <div class="card">
+      <div class="spread" style="margin-bottom:11px">
+        <div><h3>Current stock</h3><p class="note" style="margin:0">As on 02 Sep 2026, 09:40 AM</p></div>
+        <div class="row"><select class="w-md"><option>All brands</option><option>Cipla</option><option>Sun Pharma</option></select>
+          <input class="w-md" placeholder="Search product"></div>
+      </div>
+      <table><thead><tr><th>Product</th><th>Brand</th><th class="num">Available</th><th>Unit</th><th>Batch</th><th>Expiry</th></tr></thead>
+        <tbody>
+          <tr><td class="nm2">Azithral 500</td><td>Cipla</td><td class="num">2,450</td><td>Strips</td><td>AZ-4471</td><td>Mar 2028</td></tr>
+          <tr><td class="nm2">Dolo 650</td><td>Micro Labs</td><td class="num">6,120</td><td>Strips</td><td>DL-8823</td><td>Jul 2028</td></tr>
+          <tr><td class="nm2">Pan-D 40</td><td>Alkem</td><td class="num">12</td><td>Strips</td><td>PD-2214</td><td>Nov 2027</td></tr>
+          <tr><td class="nm2">Zerodol SP</td><td>Ipca</td><td class="num">640</td><td>Strips</td><td>ZS-9910</td><td>Jan 2028</td></tr>
+          <tr><td class="nm2">Montek LC</td><td>Sun Pharma</td><td class="num">1,240</td><td>Strips</td><td>ML-3345</td><td>May 2028</td></tr>
+          <tr><td class="nm2">Shelcal 500</td><td>Torrent</td><td class="num">3,010</td><td>Bottles</td><td>SC-7761</td><td>Sep 2027</td></tr>
+        </tbody></table>
+    </div>
+  </section>
+
+  <!-- ================= SETTINGS ================= -->
+  <section class="view" id="v-settings">
+    <div class="sec">
+      <div class="sec-h"><div><h2>Commission slabs</h2>
+        <p class="note">Tiered on total sales — each portion earns its own rate. Rows can be added, edited or removed.</p></div></div>
+      <div class="card">
+        <table><thead><tr><th>Slab</th><th>From (₹)</th><th>To (₹)</th><th>Rate (%)</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td><input class="w-sm" value="0"></td><td><input class="w-sm" value="1,00,000"></td><td><input class="w-sm" value="1"></td><td><button class="btn sm">Remove</button></td></tr>
+            <tr><td>2</td><td><input class="w-sm" value="1,00,001"></td><td><input class="w-sm" value="5,00,000"></td><td><input class="w-sm" value="1.5"></td><td><button class="btn sm">Remove</button></td></tr>
+            <tr><td>3</td><td><input class="w-sm" value="5,00,001"></td><td><input class="w-sm" value="10,00,000"></td><td><input class="w-sm" value="2"></td><td><button class="btn sm">Remove</button></td></tr>
+            <tr><td>4</td><td><input class="w-sm" value="10,00,001"></td><td><input class="w-sm" value="Above"></td><td><input class="w-sm" value="2.5"></td><td><button class="btn sm">Remove</button></td></tr>
+          </tbody></table>
+        <div class="row" style="margin-top:12px">
+          <button class="btn">Add slab</button>
+          <div style="width:150px"><label>Effective from</label><input type="date" value="2026-08-01" class="w-md"></div>
+          <button class="btn pri" style="align-self:flex-end" onclick="toast('Commission slabs saved')">Save slabs</button>
+        </div>
+        <div class="card" style="background:var(--bg);margin-top:14px">
+          <h3>How it is calculated</h3>
+          <p class="note" style="margin:0">A representative with ₹ 18.2 L sales earns:
+            first ₹ 1 L at 1% = ₹ 1,000 · next ₹ 4 L at 1.5% = ₹ 6,000 · next ₹ 5 L at 2% = ₹ 10,000 ·
+            remaining ₹ 8.2 L at 2.5% = ₹ 20,500 → <b>₹ 37,500 total</b>. Each portion is paid at its own slab rate.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h"><div><h2>Reminder settings</h2>
+        <p class="note">How far ahead reminders appear, and the default channel</p></div></div>
+      <div class="card">
+        <div class="row" style="align-items:flex-end;gap:14px">
+          <div><label>Remind in advance</label><select class="w-md"><option>30 days</option><option>15 days</option><option>45 days</option></select></div>
+          <div><label>Default channel</label><select class="w-md"><option>WhatsApp</option><option>Email</option></select></div>
+          <div><label>Templates</label><select class="w-md"><option>Drug licence renewal</option><option>Birthday wish</option><option>Anniversary wish</option></select></div>
+          <button class="btn">Edit template</button>
+          <button class="btn pri" onclick="toast('Settings saved')">Save</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ORDERS ================= -->
+  <section class="view" id="v-orders">
+    <div id="ord-list">
+      <div class="spread" style="margin-bottom:14px">
+        <div class="seg"><button class="on">All</button><button>Needs review</button><button>Awaiting customer</button><button>Placed</button></div>
+        <input class="w-md" placeholder="Search order or customer">
+      </div>
+      <div class="card" style="padding:6px 8px">
+        <table><thead><tr><th>Order</th><th>Customer</th><th>Received</th><th>Input</th><th class="num">Items</th><th class="num">Value</th><th>Status</th><th></th></tr></thead>
+          <tbody>
+            <tr class="click" data-ord="1"><td class="nm2">#ORD-1043</td><td>+91 98xxx 41208 <span class="chip a">Unknown</span></td><td>09:22 AM</td><td><span class="chip m">Voice</span></td><td class="num">—</td><td class="num">—</td><td><span class="chip n">Received</span></td><td><button class="btn sm">Open</button></td></tr>
+            <tr class="click" data-ord="1"><td class="nm2">#ORD-1042</td><td>Guru Pharma</td><td>08:55 AM</td><td><span class="chip m">Text</span></td><td class="num">3</td><td class="num">₹ 42,300</td><td><span class="chip a">In review</span></td><td><button class="btn sm">Open</button></td></tr>
+            <tr class="click" data-ord="1"><td class="nm2">#ORD-1041</td><td>City Pharmacy</td><td>08:31 AM</td><td><span class="chip m">PDF</span></td><td class="num">11</td><td class="num">₹ 88,700</td><td><span class="chip n">Stock checked</span></td><td><button class="btn sm">Open</button></td></tr>
+            <tr class="click" data-ord="1"><td class="nm2">#ORD-1040</td><td>Kumar Medicals</td><td>Yesterday</td><td><span class="chip m">Text</span></td><td class="num">4</td><td class="num">₹ 21,450</td><td><span class="chip g">Placed</span></td><td><button class="btn sm">Open</button></td></tr>
+            <tr class="click" data-ord="1"><td class="nm2">#ORD-1039</td><td>MGR Medicals</td><td>Yesterday</td><td><span class="chip m">Voice</span></td><td class="num">8</td><td class="num">₹ 54,900</td><td><span class="chip g">Delivered</span></td><td><button class="btn sm">Open</button></td></tr>
+            <tr class="click" data-ord="1"><td class="nm2">#ORD-1038</td><td>Sri Balaji Medicals</td><td>31 Aug</td><td><span class="chip m">PDF</span></td><td class="num">3</td><td class="num">₹ 12,100</td><td><span class="chip r">Cancelled</span></td><td><button class="btn sm">Open</button></td></tr>
+          </tbody></table>
+        <p class="note" style="margin:11px 0 4px">Statuses — Received · In review · Stock checked · Placed · Delivered · Cancelled</p>
+      </div>
+    </div>
+
+    <!-- single-screen order flow -->
+    <div id="ord-detail" style="display:none">
+      <div class="spread" style="margin-bottom:14px">
+        <div><div style="font-weight:700;font-size:15px">#ORD-1042 · Guru Pharma</div>
+          <div class="sub">Received 08:55 AM on WhatsApp · text message</div></div>
+        <div class="row"><span class="chip a">In review</span><button class="btn" id="back">Back to orders</button></div>
+      </div>
+
+      <div class="grid g2">
+        <div>
+          <!-- step 1 -->
+          <div class="step-box">
+            <div class="sh"><span class="sn">1</span><span class="st">Order received</span><span class="chip g">Number matched</span></div>
+            <div class="wa">
+              <div class="msg"><div class="who">Guru Pharma · 08:55 AM</div>
+                Anna, Dolo 650 — 50 strips, Azithral 500 — 30 strips, Pan D 40 — 20 strips venum. Naalaiku delivery mudiyuma?</div>
+            </div>
+            <p class="note" style="margin:9px 0 0">A voice note shows an audio player with its transcript. A PDF shows the file preview.
+              If the number is unknown, the owner links it to a customer or creates a new one before continuing.</p>
+          </div>
+
+          <!-- step 2 -->
+          <div class="step-box">
+            <div class="sh"><span class="sn">2</span><span class="st">What the system read — owner corrects</span></div>
+            <table><thead><tr><th>Product</th><th class="num">Qty</th><th>Match</th><th></th></tr></thead>
+              <tbody>
+                <tr><td class="nm2">Dolo 650</td><td class="num">50</td><td><span class="chip g">Matched</span></td><td><button class="btn sm">Edit</button></td></tr>
+                <tr><td class="nm2">Azithral 500</td><td class="num">30</td><td><span class="chip g">Matched</span></td><td><button class="btn sm">Edit</button></td></tr>
+                <tr><td class="nm2">"Pan D 40"</td><td class="num">20</td><td><span class="chip a">Needs check</span></td><td><button class="btn sm">Fix</button></td></tr>
+              </tbody></table>
+            <div class="row" style="margin-top:11px"><button class="btn">Add item</button>
+              <button class="btn pri" onclick="toast('Items confirmed · stock checked')">Confirm items</button></div>
+          </div>
+
+          <!-- step 3 -->
+          <div class="step-box">
+            <div class="sh"><span class="sn">3</span><span class="st">Stock check</span><span class="src">against ERP stock</span></div>
+            <table><thead><tr><th>Product</th><th class="num">Ordered</th><th class="num">In stock</th><th>Result</th></tr></thead>
+              <tbody>
+                <tr><td class="nm2">Dolo 650</td><td class="num">50</td><td class="num">6,120</td><td><span class="chip g">Full</span></td></tr>
+                <tr><td class="nm2">Azithral 500</td><td class="num">30</td><td class="num">2,450</td><td><span class="chip g">Full</span></td></tr>
+                <tr><td class="nm2">Pan-D 40</td><td class="num">20</td><td class="num">12</td><td><span class="chip a">Partial — 12 only</span></td></tr>
+              </tbody></table>
+            <p class="note" style="margin:9px 0 0">If an item is out of stock the owner chooses: send an out-of-stock message, or offer a delivery date if it can be arranged.</p>
+          </div>
+        </div>
+
+        <div>
+          <!-- step 4 -->
+          <div class="step-box">
+            <div class="sh"><span class="sn">4</span><span class="st">Delivery date and place order</span></div>
+            <div class="row" style="align-items:flex-end;margin-bottom:10px">
+              <div><label>Expected delivery</label><input type="date" value="2026-09-04" class="w-md"></div>
+              <div><label>Channel</label><select class="w-md"><option>WhatsApp</option></select></div>
+            </div>
+            <label>Acknowledgment to customer — editable</label>
+            <textarea rows="5" class="w-lg">Dear Guru Pharma, your order is received.
+Available now: Dolo 650 — 50, Azithral 500 — 30.
+Partly available: Pan-D 40 — 12 of 20.
+Expected delivery: 04 Sep 2026. Thank you.</textarea>
+            <div class="row" style="margin-top:9px"><button class="btn">Save draft</button>
+              <button class="btn pri" onclick="toast('Order placed · acknowledgment sent on WhatsApp')">Place order &amp; send</button></div>
+            <p class="note" style="margin:9px 0 0">No customer confirmation is needed. The owner places the order and the acknowledgment goes out with any partial items and the delivery date.</p>
+          </div>
+
+          <!-- step 5 -->
+          <div class="step-box">
+            <div class="sh"><span class="sn">5</span><span class="st">Acknowledgment sent</span></div>
+            <div class="wa">
+              <div class="msg"><div class="who">Guru Pharma · 08:55 AM</div>Dolo 650 — 50, Azithral 500 — 30, Pan D 40 — 20 venum.</div>
+              <div class="msg out"><div class="who">ABC Ltd · 09:12 AM</div>
+                Dear Guru Pharma, your order is received.<br>
+                Available now: Dolo 650 — 50, Azithral 500 — 30.<br>
+                Partly available: Pan-D 40 — 12 of 20.<br>
+                Expected delivery: 04 Sep 2026. Thank you.</div>
+            </div>
+          </div>
+
+          <!-- step 6 -->
+          <div class="step-box">
+            <div class="sh"><span class="sn">6</span><span class="st">Order placed</span><span class="chip g">Stock deducted</span></div>
+            <table><thead><tr><th>Stage</th><th>Time</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td>Received</td><td>08:55 AM</td><td><span class="chip g">Done</span></td></tr>
+                <tr><td>Reviewed by owner</td><td>09:08 AM</td><td><span class="chip g">Done</span></td></tr>
+                <tr><td>Stock checked</td><td>09:10 AM</td><td><span class="chip g">Done</span></td></tr>
+                <tr><td>Order placed</td><td>09:12 AM</td><td><span class="chip g">Done</span></td></tr>
+                <tr><td>Acknowledgment sent</td><td>09:12 AM</td><td><span class="chip g">Done</span></td></tr>
+                <tr><td>Delivered</td><td>04 Sep</td><td><span class="chip m">Pending</span></td></tr>
+              </tbody></table>
+            <p class="note" style="margin:9px 0 0">Deducted — Dolo 650 −50 · Azithral 500 −30 · Pan-D 40 −12</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PROCESS FLOW ================= -->
+  <section class="view" id="v-oflow">
+    <div class="hint">Every order passes through the owner before it is placed. Nothing goes to the customer without a review.</div>
+    <div class="flow">
+      <div class="stp"><div class="n">1</div><div class="t">Order received</div><div class="d">WhatsApp text, voice or PDF</div></div>
+      <div class="stp"><div class="n">2</div><div class="t">System reads it</div><div class="d">Products and quantities extracted</div></div>
+      <div class="stp"><div class="n">3</div><div class="t">Owner reviews</div><div class="d">Corrects items, confirms customer</div></div>
+      <div class="stp"><div class="n">4</div><div class="t">Stock checked</div><div class="d">Full, partial or out of stock</div></div>
+    </div>
+    <div class="flow" style="margin-bottom:22px">
+      <div class="stp"><div class="n">5</div><div class="t">Delivery date set</div><div class="d">Picked from a calendar</div></div>
+      <div class="stp"><div class="n">6</div><div class="t">Owner places order</div><div class="d">Stock deducted in the app</div></div>
+      <div class="stp"><div class="n">7</div><div class="t">Acknowledgment sent</div><div class="d">Order received · any missing item · delivery date</div></div>
+    </div>
+
+    <div class="grid g3">
+      <div class="card"><h3>Full stock</h3><p class="note" style="margin:0">Order placed and an acknowledgment is sent with the expected delivery date.</p></div>
+      <div class="card"><h3>Partial stock</h3><p class="note" style="margin:0">Order placed for what is available; the acknowledgment mentions which item is short and by how much.</p></div>
+      <div class="card"><h3>Out of stock</h3><p class="note" style="margin:0">The owner decides whether it can be procured soon and sets a delivery date in the acknowledgment.</p></div>
+    </div>
+    <div class="grid g3" style="margin-top:13px">
+      <div class="card"><h3>Known number</h3><p class="note" style="margin:0">Customer name shown automatically against the order.</p></div>
+      <div class="card"><h3>Unknown number</h3><p class="note" style="margin:0">Owner links it to an existing customer, creates a new one, or rejects the order.</p></div>
+      <div class="card"><h3>Owner places every order</h3><p class="note" style="margin:0">An order is placed only after the owner reviews it. The customer is not asked to confirm — they receive an acknowledgment once it is placed.</p></div>
+    </div>
+  </section>
+
+  <p class="foot">Pharma Suite · Owner Dashboard and Order Fulfilment · wireframe for development handover · sample data only</p>
+  </div>
+</div>
+</div>
+
+<!-- side panel: rep detail -->
+<div class="ov" id="ov"></div>
+<aside class="pnl" id="pnl">
+  <div class="pnl-h">
+    <div><h3 id="p-nm">Prakash M</h3><div class="sub" id="p-sub">Representative · Chennai North · August 2026</div></div>
+    <button class="x" id="p-x">×</button>
+  </div>
+
+  <div class="grid g2" style="margin-bottom:13px">
+    <div class="card kpi"><div class="lbl">Sales</div><div class="val">₹ 18.2 L</div><div class="dl">Target ₹ 17.8 L</div></div>
+    <div class="card kpi"><div class="lbl">Customers</div><div class="val">64</div></div>
+    <div class="card kpi"><div class="lbl">Site visits</div><div class="val">81 / 88</div><div class="dl">Done / planned</div></div>
+    <div class="card kpi"><div class="lbl">Commission</div><div class="val">₹ 31,400</div><div class="dl">Tiered slabs</div></div>
+  </div>
+
+  <div class="card" style="margin-bottom:13px">
+    <h3>Brands handled</h3><p class="note">A brand can be handled by more than one representative</p>
+    <table><thead><tr><th>Brand</th><th class="num">Revenue</th><th class="num">Share</th></tr></thead>
+      <tbody>
+        <tr><td class="nm2">Cipla</td><td class="num">₹ 6.8 L</td><td class="num">37%</td></tr>
+        <tr><td class="nm2">Sun Pharma</td><td class="num">₹ 4.9 L</td><td class="num">27%</td></tr>
+        <tr><td class="nm2">Mankind</td><td class="num">₹ 3.6 L</td><td class="num">20%</td></tr>
+        <tr><td class="nm2">Abbott</td><td class="num">₹ 2.9 L</td><td class="num">16%</td></tr>
+      </tbody></table>
+  </div>
+
+  <div class="card" style="margin-bottom:13px">
+    <h3>Top 5 products</h3><p class="note">By revenue</p>
+    <table><thead><tr><th>Product</th><th class="num">Qty</th><th class="num">Revenue</th></tr></thead>
+      <tbody>
+        <tr><td class="nm2">Azithral 500</td><td class="num">1,840</td><td class="num">₹ 2.4 L</td></tr>
+        <tr><td class="nm2">Pan-D 40</td><td class="num">1,610</td><td class="num">₹ 1.9 L</td></tr>
+        <tr><td class="nm2">Dolo 650</td><td class="num">2,900</td><td class="num">₹ 1.6 L</td></tr>
+        <tr><td class="nm2">Zerodol SP</td><td class="num">1,150</td><td class="num">₹ 1.3 L</td></tr>
+        <tr><td class="nm2">Montek LC</td><td class="num">980</td><td class="num">₹ 1.1 L</td></tr>
+      </tbody></table>
+  </div>
+
+  <div class="card">
+    <h3>Commission — August 2026</h3>
+    <table><thead><tr><th>Slab</th><th class="num">Sales in slab</th><th class="num">Rate</th><th class="num">Amount</th></tr></thead>
+      <tbody>
+        <tr><td>0 – 1 L</td><td class="num">₹ 1.0 L</td><td class="num">1%</td><td class="num">₹ 1,000</td></tr>
+        <tr><td>1 L – 5 L</td><td class="num">₹ 4.0 L</td><td class="num">1.5%</td><td class="num">₹ 6,000</td></tr>
+        <tr><td>5 L – 10 L</td><td class="num">₹ 5.0 L</td><td class="num">2%</td><td class="num">₹ 10,000</td></tr>
+        <tr><td>Above 10 L</td><td class="num">₹ 8.2 L</td><td class="num">2.5%</td><td class="num">₹ 20,500</td></tr>
+      </tbody>
+      <tfoot><tr><td>Total commission</td><td class="num"></td><td class="num"></td><td class="num">₹ 37,500</td></tr></tfoot></table>
+    <div class="row" style="margin-top:11px"><button class="btn pri" onclick="toast('Commission pushed to ERP for payment')">Push to ERP for payment</button></div>
+  </div>
+</aside>
+
+<!-- side panel: compose reminder -->
+<aside class="pnl" id="cmp">
+  <div class="pnl-h">
+    <div><h3>Send reminder</h3><div class="sub" id="c-sub">Sri Balaji Medicals · Licence expiry · 14 Sep 2026</div></div>
+    <button class="x" id="c-x">×</button>
+  </div>
+  <div class="card">
+    <div class="row" style="align-items:flex-end;margin-bottom:11px">
+      <div><label>Channel</label><select class="w-md"><option>WhatsApp</option><option>Email</option></select></div>
+      <div><label>Template</label><select class="w-md"><option>Drug licence renewal</option><option>Birthday wish</option><option>Anniversary wish</option></select></div>
+    </div>
+    <label>Message — editable before sending</label>
+    <textarea rows="6" class="w-lg" id="c-msg">Dear Mr. Ravi, a friendly reminder from ABC Ltd that your drug licence is due for renewal on 14 Sep 2026. Please renew it in time to avoid any interruption in supply.</textarea>
+    <div class="row" style="margin-top:11px">
+      <button class="btn">Save as template</button>
+      <button class="btn pri" onclick="closeAll();toast('Reminder sent · added to history')">Send now</button>
+    </div>
+  </div>
+  <p class="note" style="margin-top:12px;color:var(--ink3);font-size:11.5px">Once sent, the reminder is recorded in the history table with channel, time and delivery status.</p>
+</aside>
+
+<div class="toast" id="tst"></div>
+<script>
+const titles={
+ overview:['Overview','Owner Dashboard'],sales:['Sales & Collections','Owner Dashboard'],
+ brand:['Brands & Products','Owner Dashboard'],custtgt:['Customer Targets','Owner Dashboard'],remind:['Reminders','Owner Dashboard'],
+ inv:['Inventory','Owner Dashboard'],settings:['Settings','Owner Dashboard'],
+ orders:['Orders','Order Fulfilment'],oflow:['Process Flow','Order Fulfilment']};
+
+function go(v){
+  document.querySelectorAll('.view').forEach(s=>s.classList.toggle('on',s.id==='v-'+v));
+  document.querySelectorAll('.mi').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
+  document.getElementById('ttl').textContent=titles[v][0];
+  document.getElementById('stl').textContent=titles[v][1];
+  if(v==='orders'){showList()}
+  window.scrollTo({top:0});
+}
+document.querySelectorAll('.mi').forEach(b=>b.onclick=()=>go(b.dataset.v));
+document.querySelectorAll('[data-go]').forEach(el=>el.addEventListener('click',e=>{e.stopPropagation();go(el.dataset.go)}));
+
+/* order list <-> detail */
+function showList(){document.getElementById('ord-list').style.display='';document.getElementById('ord-detail').style.display='none'}
+document.querySelectorAll('[data-ord]').forEach(r=>r.onclick=()=>{
+  document.getElementById('ord-list').style.display='none';
+  document.getElementById('ord-detail').style.display='';window.scrollTo({top:0})});
+document.getElementById('back').onclick=showList;
+
+/* expandable brand rows */
+document.querySelectorAll('.tw').forEach(r=>r.onclick=()=>{
+  const t=document.getElementById(r.dataset.exp);t.classList.toggle('on');
+  r.querySelector('.ar').textContent=t.classList.contains('on')?'▾':'▸'});
+
+/* side panels */
+const ov=document.getElementById('ov'),pnl=document.getElementById('pnl'),cmp=document.getElementById('cmp');
+function closeAll(){ov.classList.remove('on');pnl.classList.remove('on');cmp.classList.remove('on')}
+ov.onclick=closeAll;document.getElementById('p-x').onclick=closeAll;document.getElementById('c-x').onclick=closeAll;
+
+document.querySelectorAll('[data-rep]').forEach(r=>r.onclick=()=>{
+  document.getElementById('p-nm').textContent=r.dataset.rep;ov.classList.add('on');pnl.classList.add('on')});
+
+document.querySelectorAll('[data-comp]').forEach(b=>b.onclick=e=>{
+  e.stopPropagation();const p=b.dataset.comp.split('|');
+  document.getElementById('c-sub').textContent=p[0]+' · '+p[1]+' · '+p[2];
+  ov.classList.add('on');cmp.classList.add('on')});
+
+let t;function toast(m){const e=document.getElementById('tst');e.textContent=m;e.classList.add('on');
+  clearTimeout(t);t=setTimeout(()=>e.classList.remove('on'),2200)}
+</script>
+</body>
+</html>
